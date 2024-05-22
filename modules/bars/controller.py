@@ -20,7 +20,6 @@ class _QueryParams(BaseModel):
 def get_bars(
     symbol: str, params: _QueryParams = Depends(), client=Depends(make_stock_client)
 ) -> list[Bar] | None:
-    print(params.model_dump().get("timeframe"))
     result = client.get_stock_bars(
         StockBarsRequest(
             end=datetime.now() - timedelta(days=1),
