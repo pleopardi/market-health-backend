@@ -12,13 +12,13 @@ from .stock_client import make_stock_client
 router = APIRouter(prefix="/bars")
 
 
-class QueryParams(BaseModel):
+class _QueryParams(BaseModel):
     timeframe: Literal["day", "week"] | None = Field(default="day", title="QueryParams")
 
 
 @router.get("/{symbol}")
 def get_bars(
-    symbol: str, params: QueryParams = Depends(), client=Depends(make_stock_client)
+    symbol: str, params: _QueryParams = Depends(), client=Depends(make_stock_client)
 ) -> list[Bar] | None:
     print(params.model_dump().get("timeframe"))
     result = client.get_stock_bars(
