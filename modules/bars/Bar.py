@@ -6,5 +6,5 @@ class Bar(BaseModel):
     high: float
     low: float
     open: float
-    timestamp: str
+    time: str
     volume: float

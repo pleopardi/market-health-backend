@@ -12,6 +12,6 @@ def _raw_bar_to_bar(raw_bar: RawBar) -> Bar:
         high=raw_bar.high,
         low=raw_bar.low,
         open=raw_bar.open,
-        timestamp=raw_bar.timestamp.strftime("%Y-%m-%dT%H:%M:%SZ"),
+        time=raw_bar.timestamp.strftime("%Y-%m-%d"),
         volume=raw_bar.volume,
     )
