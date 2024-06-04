@@ -2,7 +2,7 @@ from alpaca.data.requests import StockBarsRequest
 from alpaca.data.timeframe import TimeFrame, TimeFrameUnit
 from alpaca.data.models import BarSet
 from datetime import datetime, timedelta
-from fastapi import Depends
+from fastapi import Depends, HTTPException
 from typing import Literal
 from .Bar import Bar
 from .mappers import bar_set_to_bar_list
@@ -28,6 +28,9 @@ class BarsRepository:
                 ),
             )
         )
+
+        if not result[symbol]:
+            raise HTTPException(status_code=404, detail="Ticker not found")
 
         if isinstance(result, BarSet):
             return bar_set_to_bar_list(result, symbol)
